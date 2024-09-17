@@ -1,0 +1,55 @@
+{% set name = "socrata-py" %}
+{% set version = "1.1.13" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  #url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  #sha256: 2ac4db98ed8164d3cc414722601f2757ba13ac78d1c70da060aa9b34dd047233
+  url: https://github.com/socrata/socrata-py/archive/refs/tags/1.0.0.tar.gz
+  sha256: f4bea9e15e050b3bb78eb9bd097775394bd9b1fd985a6b81b206faddce0e4640
+
+build:
+  skip: True  # [py<35]
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation"
+
+requirements:
+  host:
+    - pip
+    - python
+    - setuptools
+    - wheel
+  run:
+    - python
+    - requests
+
+test:
+  imports:
+    - socrata
+    - socrata.builders
+    - socrata.operations
+  command:
+    - pip check
+    - pytest
+  requires:
+    - pip
+    - pytest
+  source_files:
+    - test
+
+about:
+  home: https://github.com/socrata/socrata-py
+  license: Apache-2.0
+  license_family: APACHE
+  license_file: LICENSE
+  description: Python SDK for the Socrata Data Management API. Use this library to call into publishing and ETL functionality offered when writing to Socrata datasets.
+  summary: SDK For publishing to Socrata
+  doc_url: https://github.com/socrata/socrata-py
+  dev_url: https://github.com/socrata/socrata-py
+
+extra:
+  recipe-maintainers:
+    - msentissi
