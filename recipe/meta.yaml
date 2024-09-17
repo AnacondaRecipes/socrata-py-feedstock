@@ -6,10 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  #url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  #sha256: 2ac4db98ed8164d3cc414722601f2757ba13ac78d1c70da060aa9b34dd047233
-  url: https://github.com/socrata/socrata-py/archive/refs/tags/1.0.0.tar.gz
-  sha256: f4bea9e15e050b3bb78eb9bd097775394bd9b1fd985a6b81b206faddce0e4640
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 2ac4db98ed8164d3cc414722601f2757ba13ac78d1c70da060aa9b34dd047233
 
 build:
   skip: True  # [py<35]
@@ -31,14 +29,10 @@ test:
     - socrata
     - socrata.builders
     - socrata.operations
-  command:
+  commands:
     - pip check
-    - pytest
   requires:
     - pip
-    - pytest
-  source_files:
-    - test
 
 about:
   home: https://github.com/socrata/socrata-py
